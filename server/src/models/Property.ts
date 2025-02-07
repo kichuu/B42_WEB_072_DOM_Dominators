@@ -1,15 +1,21 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, model, Document } from "mongoose";
 
-export interface IProperty extends Document {
-  landlord: mongoose.Types.ObjectId;
+interface Property extends Document {
+  name:string;
+  landlord: Schema.Types.ObjectId;
   address: string;
-  tenants: mongoose.Types.ObjectId[];
+  tenants: Schema.Types.ObjectId[];
+  maintenanceRequests: Schema.Types.ObjectId[];
+  rentAmount: number
 }
 
-const PropertySchema = new Schema<IProperty>({
+const PropertySchema = new Schema<Property>({ 
+  name: { type: String, required: false },
   landlord: { type: Schema.Types.ObjectId, ref: "User", required: true },
   address: { type: String, required: true },
   tenants: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  maintenanceRequests: [{ type: Schema.Types.ObjectId, ref: "MaintenanceRequest" }],
+  rentAmount: { type: Number, required: true },
 });
 
-export default mongoose.model<IProperty>("Property", PropertySchema);
+export default model<Property>("Property", PropertySchema);
