@@ -16,7 +16,7 @@ const auth = async (req: AuthRequest, res: Response, next: NextFunction) : Promi
   }
 
   try {
-    const decoded: any = jwt.verify(token, process.env.JWT_SECRET || "your-secret-key");
+    const decoded: any = jwt.verify(token, process.env.JWT_SECRET || "secret");
 
     // Add user data to request object
     req.user = { id: decoded.id, role: decoded.role };
