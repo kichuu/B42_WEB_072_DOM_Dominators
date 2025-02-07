@@ -55,7 +55,7 @@
 **Request Body:**
 ```json
 {
-  "propertyId": "string",
+  "property": "string",
   "issueType": "string",
   "description": "string",
   "urgency": "low" | "medium" | "high"
@@ -84,7 +84,7 @@
 **Request Body:**
 ```json
 {
-  "status": "pending" | "in_progress" | "completed"
+  "status": "pending" | "in-progress" | "resolved"
 }
 ```
 **Response:**
@@ -100,6 +100,26 @@
 ### Create a Property (Landlord Only)
 **Endpoint:** `POST /api/properties`
 **Description:** Allows landlords to create a new property.
+**Headers:**
+```json
+{
+  "Authorization": "Bearer jwt_token"
+}
+```
+**Request Body:**
+```json
+{
+  "name": "string",
+  "address": "string",
+  "rentAmount": "number"
+}
+```
+**Response:**
+```json
+{
+  "message": "Property created successfully"
+}
+```
 
 ### Get Properties for the Logged-in User
 **Endpoint:** `GET /api/properties`
@@ -108,10 +128,46 @@
 ### Add a Tenant to a Property
 **Endpoint:** `PUT /api/properties/:propertyId/tenant`
 **Description:** Allows landlords to assign a tenant to a property.
+**Headers:**
+```json
+{
+  "Authorization": "Bearer jwt_token"
+}
+```
+**Request Body:**
+```json
+{
+  "tenantId": "string"
+}
+```
+**Response:**
+```json
+{
+  "message": "Tenant added successfully"
+}
+```
 
 ### Update Rent for a Property
 **Endpoint:** `PUT /api/properties/:propertyId/rent`
 **Description:** Allows landlords to update the rent amount for a property.
+**Headers:**
+```json
+{
+  "Authorization": "Bearer jwt_token"
+}
+```
+**Request Body:**
+```json
+{
+  "rentAmount": "number"
+}
+```
+**Response:**
+```json
+{
+  "message": "Rent amount updated successfully"
+}
+```
 
 ---
 ## Rent Management
@@ -123,6 +179,18 @@
 ### Mark Rent as Paid (Tenant Only)
 **Endpoint:** `PUT /api/rent/:rentDueId/paid`
 **Description:** Allows tenants to mark a rent payment as completed.
+**Headers:**
+```json
+{
+  "Authorization": "Bearer jwt_token"
+}
+```
+**Response:**
+```json
+{
+  "message": "Rent marked as paid successfully"
+}
+```
 
 ---
 ## User Management
