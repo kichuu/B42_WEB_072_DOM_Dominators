@@ -56,7 +56,9 @@
 ```json
 {
   "propertyId": "string",
-  "description": "string"
+  "issueType": "string",
+  "description": "string",
+  "urgency": "low" | "medium" | "high"
 }
 ```
 **Response:**
